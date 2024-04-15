@@ -32,6 +32,7 @@ class TasksListResource(Resource):
         session = db_session.create_session()
         start = [int(x) for x in request.json["start"].split('-')]
         end = [int(x) for x in request.json["end"].split('-')]
+        print(request.json['start'])
         task = Tasks(
             task=request.json["task"],
             # start=date(year=start[0], month=start[1], day=start[2]),
