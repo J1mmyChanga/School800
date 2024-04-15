@@ -34,8 +34,10 @@ class TasksListResource(Resource):
         end = [int(x) for x in request.json["end"].split('-')]
         task = Tasks(
             task=request.json["task"],
-            start=date(year=start[0], month=start[1], day=start[2]),
-            end=date(year=end[0], month=end[1], day=end[2]),
+            # start=date(year=start[0], month=start[1], day=start[2]),
+            # end=date(year=end[0], month=end[1], day=end[2]),
+            start=request.json["start"],
+            end=request.json["end"],
             difficulty=request.json["difficulty"],
             completed=request.json["completed"],
             type=request.json["type"],
