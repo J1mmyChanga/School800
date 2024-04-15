@@ -2,7 +2,7 @@ import os
 
 from flask import Flask, request, flash, redirect, send_from_directory
 from flask_restful import Api
-from flask_cors import CORS
+from flask_cors import CORS, cross_origin
 
 from werkzeug.serving import WSGIRequestHandler
 from werkzeug.utils import secure_filename
