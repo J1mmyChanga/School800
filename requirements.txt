@@ -1,0 +1,7 @@
+flask_restful
+flask
+sqlalchemy
+werkzeug
+unicorn
+gunicorn
+pillow
