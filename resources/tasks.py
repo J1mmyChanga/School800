@@ -13,11 +13,13 @@ class TasksListResource(Resource):
         session = db_session.create_session()
         tasks = session.query(Tasks)
         for i in tasks:
+            start = f'{i.start.year}-{i.start.month}-{i.start.day}'
+            end = f'{i.end.year}-{i.end.month}-{i.end.day}'
             d = {
                 'id': i.id,
                 'task': i.task,
-                'start': i.start,
-                'end': i.end,
+                'start': start,
+                'end': end,
                 'difficulty': i.difficulty,
                 'completed': i.completed,
                 'type': i.type,
