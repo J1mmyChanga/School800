@@ -6,6 +6,7 @@ from werkzeug.serving import WSGIRequestHandler
 from werkzeug.utils import secure_filename
 from misc.utils import *
 from data import db_session
+from resources import *
 
 UPLOAD_FOLDER = 'assets'
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
@@ -20,8 +21,9 @@ db_session.global_init('db/school800.db')
 api = Api(app)
 # api.add_resource(RegisterResource, "/api/register")
 # api.add_resource(LoginResource, "/api/login")
-# api.add_resource(RoutesResource, "/api/routes")
-# api.add_resource(PlacesResource, "/api/places")
+api.add_resource(TasksListResource, "/api/tasks")
+api.add_resource(TaskResource, "/api/tasks/<int:task_id>")
+api.add_resource(GroupResource, "/api/groups")
 
 
 @app.route('/upload', methods=['POST'])

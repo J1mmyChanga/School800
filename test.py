@@ -9,10 +9,10 @@ from data.association_tables import *
 db_session.global_init('db/school800.db')
 session = db_session.create_session()
 
-g1 = Groups(title='Абобики')
-g2 = Groups(title='Кроты')
-g3 = Groups(title='Шпроты')
-g4 = Groups(title='Раковина')
+g1 = Groups(title='Абобики', rating=4464)
+g2 = Groups(title='Кроты', rating=6879)
+g3 = Groups(title='Шпроты', rating=2234)
+g4 = Groups(title='Раковина', rating=2868)
 for i in range(1, 5):
     session.add(eval(f'g{i}'))
 
