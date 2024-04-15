@@ -1,9 +1,12 @@
 import os
 
-from flask_restful import Api
 from flask import Flask, request, flash, redirect, send_from_directory
+from flask_restful import Api
+from flask_cors import CORS
+
 from werkzeug.serving import WSGIRequestHandler
 from werkzeug.utils import secure_filename
+
 from misc.utils import *
 from data import db_session
 from resources import *
@@ -12,6 +15,7 @@ UPLOAD_FOLDER = 'assets'
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 
 app = Flask(__name__)
+CORS(app)
 app.config["SECRET_KEY"] = "Bebrochka666"
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['JSON_AS_ASCII'] = False
