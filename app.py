@@ -15,7 +15,7 @@ UPLOAD_FOLDER = 'assets'
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, resources={r"/api/*": {"origins": "*"}})
 app.config["SECRET_KEY"] = "Bebrochka666"
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['JSON_AS_ASCII'] = False
@@ -44,6 +44,11 @@ def upload_file():
     if file and allowed_file(file.filename):
         filename = secure_filename(file.filename)
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+
+
+@app.route('/api/ping', methods=['GET'])
+def ping_method():
+    return 'pong'
 
 
 @app.route('/uploads/<name>')
