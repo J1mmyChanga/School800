@@ -35,10 +35,8 @@ class TasksListResource(Resource):
         print(request.json['start'])
         task = Tasks(
             task=request.json["task"],
-            # start=date(year=start[0], month=start[1], day=start[2]),
-            # end=date(year=end[0], month=end[1], day=end[2]),
-            start=request.json["start"],
-            end=request.json["end"],
+            start=date(year=start[0], month=start[1], day=start[2]),
+            end=date(year=end[0], month=end[1], day=end[2]),
             difficulty=request.json["difficulty"],
             completed=request.json["completed"],
             type=request.json["type"],
@@ -69,11 +67,13 @@ class TaskResource(Resource):
         task = session.get(Tasks, task_id)
         if not task:
             return {'wrong answer': "task wasn't found"}
+        start = f'{task.start.year}-{task.start.month}-{task.start.day}'
+        end = f'{task.end.year}-{task.end.month}-{task.end.day}'
         res = [{
             'id': task.id,
             'task': task.task,
-            'start': task.start,
-            'end': task.end,
+            'start': start,
+            'end': end,
             'difficulty': task.difficulty,
             'completed': task.completed,
             'type': task.type,
