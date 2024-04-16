@@ -25,8 +25,10 @@ class RegisterResource(Resource):
             rating=rating,
             grade=grade,
         )
+        print('EFGSGsDRDZGARGDHATFTTRFFSSAGAADR')
         if user:
             return jsonify({"err": "User already exists"})
+        print('EFGSGsDRDZGARGDHATFTTRFFSSAGAADR')
         user.set_password(password)
         session.add(user)
         session.commit()
