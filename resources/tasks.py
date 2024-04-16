@@ -11,7 +11,7 @@ class TasksListResource(Resource):
     def get():
         res = []
         session = db_session.create_session()
-        tasks = session.query(Tasks)
+        tasks = session.query(Tasks).all()
         for task in tasks:
             start = f'{task.start.year}-{task.start.month}-{task.start.day}'
             end = f'{task.end.year}-{task.end.month}-{task.end.day}'
