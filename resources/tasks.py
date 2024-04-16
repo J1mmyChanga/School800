@@ -113,16 +113,19 @@ class TaskPhotoResource(Resource):
 class AddingTaskPhotoResource(Resource):
     @staticmethod
     def post():
+        print(request.files)
         if 'file' not in request.files:
             flash('No file part')
             return redirect(request.url)
         file = request.files['file']
+        print(file)
         if file.filename == '':
             flash('No selected file')
             return redirect(request.url)
 
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
+            print(filename)
             file.save(os.path.join('assets/tasks', filename))
 
 
