@@ -9,5 +9,4 @@ class Groups(SqlAlchemyBase):
 
     id = sqlalchemy.Column(sqlalchemy.Integer, primary_key=True, autoincrement=True)
     title = sqlalchemy.Column(sqlalchemy.String)
-    image = sqlalchemy.Column(sqlalchemy.String)
     rating = sqlalchemy.Column(sqlalchemy.Integer)

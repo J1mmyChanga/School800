@@ -25,7 +25,6 @@ class UsersListResource(Resource):
                 'rating': user.rating,
                 'grade': user.grade,
                 'group': user.group,
-                'image':user.image
             }
             res.append(d)
         return jsonify(res)
@@ -60,7 +59,6 @@ class UserResource(Resource):
             'rating': user.rating,
             'grade': user.grade,
             'group': user.group,
-            'image': user.image,
         }]
         return jsonify(res)
 
@@ -72,7 +70,7 @@ class UserPhotoResource(Resource):
         user = session.get(Users, user_uid)
         if not user:
             return {'wrong answer': "user wasn't found"}
-        return send_from_directory('assets/users', user.image)
+        return send_from_directory('assets/users', f'{user_uid}.png')
 
 
 class AddingUserPhotoResource(Resource):

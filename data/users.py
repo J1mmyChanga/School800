@@ -16,7 +16,6 @@ class Users(SqlAlchemyBase):
     rating = sqlalchemy.Column(sqlalchemy.Integer)
     grade = sqlalchemy.Column(sqlalchemy.String)
     group = sqlalchemy.Column(sqlalchemy.Integer, sqlalchemy.ForeignKey("groups.id"))
-    image = sqlalchemy.Column(sqlalchemy.String)
     hashed_password = sqlalchemy.Column(sqlalchemy.String)
 
     groups = orm.relationship(

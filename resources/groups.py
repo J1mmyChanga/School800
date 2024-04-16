@@ -27,4 +27,4 @@ class GroupPhotoResource(Resource):
         group = session.get(Groups, group_id)
         if not group:
             return {'wrong answer': "group wasn't found"}
-        return send_from_directory('assets/groups', task.image)
+        return send_from_directory('assets/groups', f'{group.id}.png')
