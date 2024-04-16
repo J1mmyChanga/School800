@@ -1,6 +1,8 @@
 import io
 from PIL import Image
 
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'jfif'}
+
 
 def convert_to_binary(img):
     image = Image.open(img)

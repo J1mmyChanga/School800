@@ -30,7 +30,6 @@ class TasksListResource(Resource):
                 'kind': task.kind,
                 'daily': task.daily,
                 'image': task.image,
-                'image_completed': task.image_completed,
             }
             res.append(d)
         return jsonify(res)
@@ -49,8 +48,7 @@ class TasksListResource(Resource):
             individual=request.json["individual"],
             kind=request.json["kind"],
             daily=request.json["daily"],
-            image=request.json["image"],
-            image_completed=request.json["image_completed"],
+            image='',
         )
         session.add(task)
         session.commit()
@@ -87,7 +85,6 @@ class TaskResource(Resource):
             'kind': task.kind,
             'daily': task.daily,
             'image': task.image,
-            'image_completed': task.image_completed,
         }]
         return jsonify(res)
 
@@ -99,7 +96,7 @@ class TaskPhotoResource(Resource):
         task = session.get(Tasks, task_id)
         if not task:
             return {'wrong answer': "task wasn't found"}
-        return send_from_directory('assets/tasks', task.image)
+        return send_from_directory('assets/tasks', f'{task.id}.png')
 
 
 # class TaskCompletedPhotoResource(Resource):

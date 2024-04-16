@@ -19,4 +19,5 @@ myobj1 = {
 #print(requests.get(url))
 #print(requests.post(url, json=myobj))
 # print(requests.put(url, json=myobj1))
-print(requests.put('http://127.0.0.1:8080//api/groups', json={'id': 3, 'rating': 464}))
+# print(requests.put('http://127.0.0.1:8080/api/groups', json={'id': 3, 'rating': 464}))
+print(requests.post('http://127.0.0.1:8080/api/tasks/images', json={'file': 'qfes'}))

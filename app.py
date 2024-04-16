@@ -13,7 +13,6 @@ from data.users import Users
 from resources import *
 
 UPLOAD_FOLDER = 'assets/users'
-ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'jfif'}
 
 app = Flask(__name__)
 CORS(app, supports_credentials=True)
