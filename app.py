@@ -32,11 +32,12 @@ api.add_resource(TaskPhotoResource, "/api/tasks/images/<int:task_id>")
 api.add_resource(AddingTaskPhotoResource, "/api/tasks/images")
 
 api.add_resource(GroupResource, "/api/groups")
+api.add_resource(GroupPhotoResource, "/api/groups/images/<int:group_id>")
 
 api.add_resource(KindsListResource, "/api/kinds")
 
 api.add_resource(UsersListResource, "/api/users")
-api.add_resource(UserResource, "/api/users/<int:user_id>")
+api.add_resource(UserResource, "/api/users/<string:user_uid>")
 api.add_resource(UserPhotoResource, "/api/users/images/<string:user_uid>")
 api.add_resource(AddingUserPhotoResource, "/api/users/images")
 

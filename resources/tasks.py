@@ -97,6 +97,8 @@ class TaskPhotoResource(Resource):
     def get(task_id):
         session = db_session.create_session()
         task = session.get(Tasks, task_id)
+        if not task:
+            return {'wrong answer': "task wasn't found"}
         return send_from_directory('assets/tasks', task.image)
 
 

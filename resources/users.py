@@ -46,9 +46,9 @@ class UsersListResource(Resource):
 
 class UserResource(Resource):
     @staticmethod
-    def get(user_id):
+    def get(user_uid):
         session = db_session.create_session()
-        user = session.get(Users, user_id)
+        user = session.get(Users, user_uid)
         if not user:
             return {'wrong answer': "user wasn't found"}
         res = [{
@@ -70,6 +70,8 @@ class UserPhotoResource(Resource):
     def get(user_uid):
         session = db_session.create_session()
         user = session.get(Users, user_uid)
+        if not user:
+            return {'wrong answer': "user wasn't found"}
         return send_from_directory('assets/users', user.image)
 
 
