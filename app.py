@@ -27,9 +27,13 @@ api = Api(app)
 # api.add_resource(LoginResource, "/api/login")
 api.add_resource(TasksListResource, "/api/tasks")
 api.add_resource(TaskResource, "/api/tasks/<int:task_id>")
+
 api.add_resource(GroupResource, "/api/groups")
+
 api.add_resource(KindsListResource, "/api/kinds")
-api.add_resource(UserRatingResource, "/api/rating")
+
+api.add_resource(UsersListResource, "/api/users")
+api.add_resource(UserResource, "/api/users/<int:user_id>")
 
 
 @app.route('/upload', methods=['POST'])

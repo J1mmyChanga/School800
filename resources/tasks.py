@@ -12,19 +12,18 @@ class TasksListResource(Resource):
         res = []
         session = db_session.create_session()
         tasks = session.query(Tasks)
-        for i in tasks:
-            start = f'{i.start.year}-{i.start.month}-{i.start.day}'
-            end = f'{i.end.year}-{i.end.month}-{i.end.day}'
+        for task in tasks:
+            start = f'{task.start.year}-{task.start.month}-{task.start.day}'
+            end = f'{task.end.year}-{task.end.month}-{task.end.day}'
             d = {
-                'id': i.id,
-                'task': i.task,
+                'id': task.id,
+                'task': task.task,
                 'start': start,
                 'end': end,
-                'difficulty': i.difficulty,
-                'completed': i.completed,
-                'type': i.type,
-                'kind': i.kind,
-                'daily': i.daily,
+                'difficulty': task.difficulty,
+                'type': task.type,
+                'kind': task.kind,
+                'daily': task.daily,
             }
             res.append(d)
         return jsonify(res)
@@ -40,7 +39,6 @@ class TasksListResource(Resource):
             start=date(year=start[0], month=start[1], day=start[2]),
             end=date(year=end[0], month=end[1], day=end[2]),
             difficulty=request.json["difficulty"],
-            completed=request.json["completed"],
             type=request.json["type"],
             kind=request.json["kind"],
             daily=request.json["daily"],
@@ -77,7 +75,6 @@ class TaskResource(Resource):
             'start': start,
             'end': end,
             'difficulty': task.difficulty,
-            'completed': task.completed,
             'type': task.type,
             'kind': task.kind,
             'daily': task.daily,

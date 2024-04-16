@@ -12,22 +12,36 @@ class Tasks(SqlAlchemyBase):
     start = sqlalchemy.Column(sqlalchemy.Date)  # начало задания
     end = sqlalchemy.Column(sqlalchemy.Date)  # конец задания
     difficulty = sqlalchemy.Column(sqlalchemy.Integer)  # 1 - легкое, 2 - среднее, 3 - сложное
-    completed = sqlalchemy.Column(sqlalchemy.Boolean)  # выполнено - true или нет - false
     type = sqlalchemy.Column(sqlalchemy.Integer)  # групповое - 2 или индивидуальное - 1
     kind = sqlalchemy.Column(sqlalchemy.Integer, sqlalchemy.ForeignKey('kinds.id')) #направление задания
+    image = sqlalchemy.Column(sqlalchemy.String)
     daily = sqlalchemy.Column(sqlalchemy.Boolean) # ежедневное - true или нет - false
 
-    users = orm.relationship(
+    users_completed = orm.relationship(
         "Users",
-        secondary="tasks_to_users",
-        backref="tasks"
+        secondary="tasks_to_users_completed",
+        backref="tasks_completed"
     )
 
-    groups = orm.relationship(
+    groups_completed = orm.relationship(
         "Groups",
-        secondary="tasks_to_groups",
-        backref="tasks"
+        secondary="tasks_to_groups_completed",
+        backref="tasks_completed"
     )
+
+    users_in_process = orm.relationship(
+        "Users",
+        secondary="tasks_to_users_in_process",
+        backref="tasks_in_process"
+    )
+
+    groups_in_process = orm.relationship(
+        "Groups",
+        secondary="tasks_to_groups_in_process",
+        backref="tasks_in_process"
+    )
+
+
 
     kinds = orm.relationship(
         "Kinds",
