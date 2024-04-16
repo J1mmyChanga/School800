@@ -1,4 +1,4 @@
-from flask import jsonify
+from flask import jsonify, request
 from flask_restful import Resource
 
 from data import db_session
@@ -18,3 +18,13 @@ class KindsListResource(Resource):
             }
             res.append(d)
         return jsonify(res)
+
+    @staticmethod
+    def post():
+        session = db_session.create_session()
+        kind = Kinds(
+            title=request.json["title"]
+        )
+        session.add(kind)
+        session.commit()
+        return jsonify({'success': 'OK'})

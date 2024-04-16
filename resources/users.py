@@ -5,6 +5,7 @@ from flask_restful import Resource
 from werkzeug.utils import secure_filename
 
 from data import db_session
+from data.groups import Groups
 from data.users import Users
 from misc import allowed_file
 
@@ -15,7 +16,6 @@ class UsersListResource(Resource):
         res = []
         session = db_session.create_session()
         users = session.query(Users).all()
-        print(users)
         for user in users:
             d = {
                 'id': user.id,
@@ -35,14 +35,14 @@ class UsersListResource(Resource):
         id = request.json["id"]
         rating = request.json["rating"]
         group = request.json["group"]
-        print(group)
-        print(rating)
 
         session = db_session.create_session()
         user = session.get(Users, id)
         if not user:
             return {'wrong answer': "user wasn't found"}
         user.rating += rating
+        if group != 0:
+            user.group = group
         session.commit()
         return {'success': 'OK'}
 
@@ -96,3 +96,46 @@ class AddingUserPhotoResource(Resource):
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
             file.save(os.path.join('assets/users', filename))
+
+
+class MVUsersInGroup(Resource):
+    @staticmethod
+    def get(group_id):
+        res = []
+        session = db_session.create_session()
+        group = session.get(Groups, group_id)
+        for user in group.users:
+            d = {
+                'id': user.id,
+                'email': user.email,
+                'first_name': user.first_name,
+                'second_name': user.second_name,
+                'surname': user.surname,
+                'rating': user.rating,
+                'grade': user.grade,
+                'group': user.group,
+            }
+            res.append(d)
+        res = sorted(res, key=lambda x: x['rating'], reverse=True)
+        return jsonify(res)
+
+
+class MVUsers(Resource):
+    @staticmethod
+    def get():
+        res = []
+        session = db_session.create_session()
+        for user in session.query(Users).all():
+            d = {
+                'id': user.id,
+                'email': user.email,
+                'first_name': user.first_name,
+                'second_name': user.second_name,
+                'surname': user.surname,
+                'rating': user.rating,
+                'grade': user.grade,
+                'group': user.group,
+            }
+            res.append(d)
+        res = sorted(res, key=lambda x: x['rating'], reverse=True)
+        return jsonify(res)
