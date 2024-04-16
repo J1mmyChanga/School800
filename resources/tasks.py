@@ -39,7 +39,6 @@ class TasksListResource(Resource):
         session = db_session.create_session()
         start = [int(x) for x in request.json["start"].split('-')]
         end = [int(x) for x in request.json["end"].split('-')]
-        print(request.json['start'])
         task = Tasks(
             task=request.json["task"],
             start=date(year=start[0], month=start[1], day=start[2]),
@@ -99,44 +98,17 @@ class TaskPhotoResource(Resource):
         return send_from_directory('assets/tasks', f'{task.id}.png')
 
 
-# class TaskCompletedPhotoResource(Resource):
-#     @staticmethod
-#     def get(task_id):
-#         session = db_session.create_session()
-#         task = session.get(Tasks, task_id)
-#         return send_from_directory('assets/tasks', task.image)
-
-
 class AddingTaskPhotoResource(Resource):
     @staticmethod
     def post():
-        print(request.files)
         if 'file' not in request.files:
             flash('No file part')
             return redirect(request.url)
         file = request.files['file']
-        print(file)
         if file.filename == '':
             flash('No selected file')
             return redirect(request.url)
 
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
-            print(filename)
             file.save(os.path.join('assets/tasks', filename))
-
-
-# class AddingTaskPhotoResource(Resource):
-#     @staticmethod
-#     def post():
-#         if 'file' not in request.files:
-#             flash('No file part')
-#             return redirect(request.url)
-#         file = request.files['file']
-#         if file.filename == '':
-#             flash('No selected file')
-#             return redirect(request.url)
-#
-#         if file and allowed_file(file.filename):
-#             filename = secure_filename(file.filename)
-#             file.save(os.path.join('assets/tasks', filename))

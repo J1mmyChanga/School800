@@ -9,15 +9,15 @@ from data.users import Users
 
 class LoginResource(Resource):
     @staticmethod
-    def post():
+    def get():
         password = request.json["password"]
         email = request.json["email"]
 
         session = db_session.create_session()
-        user: Users = session.query(Users).filter(Users.email == email).first()
+        user = session.query(Users).filter(Users.email == email).first()
         if not user:
             return jsonify({"err": "Wrong nickname"})
 
         if user.check_password(password):
-            return jsonify("success")
+            return jsonify({"success" : "OK"})
         return jsonify({"err": "Wrong password"})
