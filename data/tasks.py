@@ -12,7 +12,7 @@ class Tasks(SqlAlchemyBase):
     start = sqlalchemy.Column(sqlalchemy.Date)  # начало задания
     end = sqlalchemy.Column(sqlalchemy.Date)  # конец задания
     difficulty = sqlalchemy.Column(sqlalchemy.Integer)  # 1 - легкое, 2 - среднее, 3 - сложное
-    type = sqlalchemy.Column(sqlalchemy.Integer)  # групповое - 2 или индивидуальное - 1
+    individual = sqlalchemy.Column(sqlalchemy.Boolean)  # групповое - false или индивидуальное - true
     kind = sqlalchemy.Column(sqlalchemy.Integer, sqlalchemy.ForeignKey('kinds.id')) #направление задания
     image = sqlalchemy.Column(sqlalchemy.String)
     daily = sqlalchemy.Column(sqlalchemy.Boolean) # ежедневное - true или нет - false

@@ -21,7 +21,7 @@ class TasksListResource(Resource):
                 'start': start,
                 'end': end,
                 'difficulty': task.difficulty,
-                'type': task.type,
+                'individual': task.individual,
                 'kind': task.kind,
                 'daily': task.daily,
             }
@@ -39,7 +39,7 @@ class TasksListResource(Resource):
             start=date(year=start[0], month=start[1], day=start[2]),
             end=date(year=end[0], month=end[1], day=end[2]),
             difficulty=request.json["difficulty"],
-            type=request.json["type"],
+            individual=request.json["individual"],
             kind=request.json["kind"],
             daily=request.json["daily"],
         )
@@ -55,7 +55,6 @@ class TasksListResource(Resource):
         if not task:
             return {'wrong answer': "task wasn't found"}
         # вся логика
-        task.completed = not(task.completed)
         session.commit()
         return {'success': 'OK'}
 
@@ -75,7 +74,7 @@ class TaskResource(Resource):
             'start': start,
             'end': end,
             'difficulty': task.difficulty,
-            'type': task.type,
+            'individual': task.individual,
             'kind': task.kind,
             'daily': task.daily,
         }]
