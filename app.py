@@ -42,28 +42,6 @@ api.add_resource(UserPhotoResource, "/api/users/images/<string:user_uid>")
 api.add_resource(AddingUserPhotoResource, "/api/users/images")
 
 
-# @app.route('/api/users/images', methods=['POST'])
-# def upload_file():
-#     if 'file' not in request.files:
-#         flash('No file part')
-#         return redirect(request.url)
-#     file = request.files['file']
-#     if file.filename == '':
-#         flash('No selected file')
-#         return redirect(request.url)
-#
-#     if file and allowed_file(file.filename):
-#         filename = secure_filename(file.filename)
-#         file.save(os.path.join(f"{app.config['UPLOAD_FOLDER']}", filename))
-#
-#
-# @app.route('/api/users/images/<string:user_uid>', methods=['GET'])
-# def download_file(user_uid):
-#     session = db_session.create_session()
-#     user = session.get(Users, user_uid)
-#     return send_from_directory(app.config["UPLOAD_FOLDER"], user.image)
-
-
 def main():
     WSGIRequestHandler.protocol_version = "HTTP/1.1"
     app.run(port=8080, host='0.0.0.0')
