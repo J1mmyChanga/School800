@@ -1,8 +1,12 @@
-from flask import request, jsonify
+import os
+
+from flask import request, jsonify, send_from_directory, flash, redirect
 from flask_restful import Resource
+from werkzeug.utils import secure_filename
 
 from data import db_session
 from data.users import Users
+from misc import allowed_file
 
 
 class UsersListResource(Resource):
@@ -59,3 +63,24 @@ class UserResource(Resource):
             'hashed_password': user.hashed_password,
         }]
         return jsonify(res)
+
+
+class UserPhotoResource(Resource):
+    @staticmethod
+    def get(name):
+        return send_from_directory('assets/users', name)
+
+class AddingUserPhotoResource(Resource):
+    @staticmethod
+    def post():
+        if 'file' not in request.files:
+            flash('No file part')
+            return redirect(request.url)
+        file = request.files['file']
+        if file.filename == '':
+            flash('No selected file')
+            return redirect(request.url)
+
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            file.save(os.path.join('assets/users', filename))

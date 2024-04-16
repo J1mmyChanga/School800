@@ -9,7 +9,7 @@ from data.association_tables import *
 db_session.global_init('db/school800.db')
 session = db_session.create_session()
 
-g1 = Groups(title='Инноваторы: Нео', rating=4464, image='neo.')
+g1 = Groups(title='Новаторы: Нео', rating=4464, image='neo.')
 g2 = Groups(title='Инженеры: Класт', rating=6879, image='clast.')
 g3 = Groups(title='Аналитики: Трейл', rating=2234, image='trail.')
 g4 = Groups(title='Исследователи: Скрипт', rating=2868, image='script.')

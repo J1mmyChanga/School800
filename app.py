@@ -2,16 +2,17 @@ import os
 
 from flask import Flask, request, flash, redirect, send_from_directory
 from flask_restful import Api
-from flask_cors import CORS, cross_origin
+from flask_cors import CORS
 
 from werkzeug.serving import WSGIRequestHandler
 from werkzeug.utils import secure_filename
 
 from misc.utils import *
 from data import db_session
+from data.users import Users
 from resources import *
 
-UPLOAD_FOLDER = 'assets'
+UPLOAD_FOLDER = 'assets/users'
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 
 app = Flask(__name__)
@@ -36,7 +37,7 @@ api.add_resource(UsersListResource, "/api/users")
 api.add_resource(UserResource, "/api/users/<int:user_id>")
 
 
-@app.route('/upload', methods=['POST'])
+@app.route('/api/users/images', methods=['POST'])
 def upload_file():
     if 'file' not in request.files:
         flash('No file part')
@@ -48,17 +49,14 @@ def upload_file():
 
     if file and allowed_file(file.filename):
         filename = secure_filename(file.filename)
-        file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        file.save(os.path.join(f"{app.config['UPLOAD_FOLDER']}", filename))
 
 
-@app.route('/api/ping', methods=['GET'])
-def ping_method():
-    return 'pong'
-
-
-@app.route('/uploads/<name>')
-def download_file(name):
-    return send_from_directory(app.config["UPLOAD_FOLDER"], name)
+@app.route('/api/users/images/<user_uid>', methods=['GET'])
+def download_file(user_uid):
+    session = db_session.create_session()
+    user = session.get(Users, user_uid)
+    return send_from_directory(app.config["UPLOAD_FOLDER"], user.image)
 
 
 def main():
