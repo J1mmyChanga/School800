@@ -52,10 +52,14 @@ def upload_file():
         file.save(os.path.join(f"{app.config['UPLOAD_FOLDER']}", filename))
 
 
-@app.route('/api/users/images/<user_uid>', methods=['GET'])
+@app.route('/api/users/images/<string:user_uid>', methods=['GET'])
 def download_file(user_uid):
+    print(user_uid)
     session = db_session.create_session()
     user = session.get(Users, user_uid)
+    print(user)
+    print(app.config["UPLOAD_FOLDER"])
+    print(user.image)
     return send_from_directory(app.config["UPLOAD_FOLDER"], user.image)
 
 
