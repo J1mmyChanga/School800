@@ -8,7 +8,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 class Users(SqlAlchemyBase):
     __tablename__ = 'users'
 
-    uid = sqlalchemy.Column(sqlalchemy.String, primary_key=True)
+    id = sqlalchemy.Column(sqlalchemy.Integer, primary_key=True)
     email = sqlalchemy.Column(sqlalchemy.String, index=True, unique=True)
     first_name = sqlalchemy.Column(sqlalchemy.String)
     second_name = sqlalchemy.Column(sqlalchemy.String)

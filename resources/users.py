@@ -17,7 +17,7 @@ class UsersListResource(Resource):
         users = session.query(Users)
         for user in users:
             d = {
-                'uid': user.uid,
+                'id': user.id,
                 'email': user.email,
                 'first_name': user.first_name,
                 'second_name': user.second_name,
@@ -31,11 +31,11 @@ class UsersListResource(Resource):
 
     @staticmethod
     def put():
-        uid = request.json["uid"]
+        id = request.json["id"]
         rating = request.json["rating"]
 
         session = db_session.create_session()
-        user = session.get(Users, uid)
+        user = session.get(Users, id)
         if not user:
             return {'wrong answer': "user wasn't found"}
         user.rating += rating
@@ -45,13 +45,13 @@ class UsersListResource(Resource):
 
 class UserResource(Resource):
     @staticmethod
-    def get(user_uid):
+    def get(user_id):
         session = db_session.create_session()
-        user = session.get(Users, user_uid)
+        user = session.get(Users, user_id)
         if not user:
             return {'wrong answer': "user wasn't found"}
         res = [{
-            'uid': user.uid,
+            'id': user.id,
             'email': user.email,
             'first_name': user.first_name,
             'second_name': user.second_name,
@@ -65,12 +65,12 @@ class UserResource(Resource):
 
 class UserPhotoResource(Resource):
     @staticmethod
-    def get(user_uid):
+    def get(user_id):
         session = db_session.create_session()
-        user = session.get(Users, user_uid)
+        user = session.get(Users, user_id)
         if not user:
             return {'wrong answer': "user wasn't found"}
-        return send_from_directory('assets/users', f'{user_uid}.png')
+        return send_from_directory('assets/users', f'{user_id}.png')
 
 
 class AddingUserPhotoResource(Resource):

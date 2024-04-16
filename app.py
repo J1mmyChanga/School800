@@ -1,15 +1,12 @@
 import os
 
-from flask import Flask, request, flash, redirect, send_from_directory
+from flask import Flask
 from flask_restful import Api
 from flask_cors import CORS
 
 from werkzeug.serving import WSGIRequestHandler
-from werkzeug.utils import secure_filename
 
-from misc.utils import *
 from data import db_session
-from data.users import Users
 from resources import *
 
 UPLOAD_FOLDER = 'assets/users'
@@ -37,8 +34,8 @@ api.add_resource(GroupPhotoResource, "/api/groups/images/<int:group_id>")
 api.add_resource(KindsListResource, "/api/kinds")
 
 api.add_resource(UsersListResource, "/api/users")
-api.add_resource(UserResource, "/api/users/<string:user_uid>")
-api.add_resource(UserPhotoResource, "/api/users/images/<string:user_uid>")
+api.add_resource(UserResource, "/api/users/<int:user_id>")
+api.add_resource(UserPhotoResource, "/api/users/images/<int:user_id>")
 api.add_resource(AddingUserPhotoResource, "/api/users/images")
 
 

@@ -8,7 +8,6 @@ from data.users import Users
 class RegisterResource(Resource):
     @staticmethod
     def post():
-        uid = request.json["uid"]
         email = request.json["email"]
         first_name = request.json["first_name"]
         second_name = request.json["second_name"]
@@ -19,7 +18,6 @@ class RegisterResource(Resource):
 
         session = db_session.create_session()
         user = Users(
-            uid=uid,
             email=email,
             first_name=first_name,
             second_name=second_name,
