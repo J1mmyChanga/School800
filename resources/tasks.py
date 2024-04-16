@@ -1,9 +1,14 @@
+import os
+
 from flask_restful import Resource
-from flask import jsonify, request
+from flask import jsonify, request, send_from_directory, flash, redirect
 from datetime import date
+
+from werkzeug.utils import secure_filename
 
 from data import db_session
 from data.tasks import Tasks
+from misc import allowed_file
 
 
 class TasksListResource(Resource):
@@ -85,3 +90,51 @@ class TaskResource(Resource):
             'image_completed': task.image_completed,
         }]
         return jsonify(res)
+
+
+class TaskPhotoResource(Resource):
+    @staticmethod
+    def get(task_id):
+        session = db_session.create_session()
+        task = session.get(Tasks, task_id)
+        return send_from_directory('assets/tasks', task.image)
+
+
+# class TaskCompletedPhotoResource(Resource):
+#     @staticmethod
+#     def get(task_id):
+#         session = db_session.create_session()
+#         task = session.get(Tasks, task_id)
+#         return send_from_directory('assets/tasks', task.image)
+
+
+class AddingTaskPhotoResource(Resource):
+    @staticmethod
+    def post():
+        if 'file' not in request.files:
+            flash('No file part')
+            return redirect(request.url)
+        file = request.files['file']
+        if file.filename == '':
+            flash('No selected file')
+            return redirect(request.url)
+
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            file.save(os.path.join('assets/tasks', filename))
+
+
+# class AddingTaskPhotoResource(Resource):
+#     @staticmethod
+#     def post():
+#         if 'file' not in request.files:
+#             flash('No file part')
+#             return redirect(request.url)
+#         file = request.files['file']
+#         if file.filename == '':
+#             flash('No selected file')
+#             return redirect(request.url)
+#
+#         if file and allowed_file(file.filename):
+#             filename = secure_filename(file.filename)
+#             file.save(os.path.join('assets/tasks', filename))

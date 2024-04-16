@@ -34,11 +34,11 @@ for i in range(1, 4):
     session.add(eval(f'u{i}'))
 
 t1 = Tasks(task='Полить цветы на школьной территории',
-           image='---', kind=7, daily=True, difficulty=1, individual=True, start=date(year=2024, month=3, day=1), end=date(year=2024, month=3, day=2))
+           image='1.jfif', kind=7, daily=True, difficulty=1, individual=True, start=date(year=2024, month=3, day=1), end=date(year=2024, month=3, day=2))
 t2 = Tasks(task='Подмести и вымыть пол на школьной площадке',
-           image='---', kind=7, daily=False, difficulty=2, individual=False, start=date(year=2024, month=3, day=7), end=date(year=2024, month=3, day=14))
+           image='2.jfif', kind=7, daily=False, difficulty=2, individual=False, start=date(year=2024, month=3, day=7), end=date(year=2024, month=3, day=14))
 t3 = Tasks(task='Провести исследование и написать отчёт о том, какие виды растений лучше всего подходят для обустройства школьного двора',
-           image='---', kind=2, daily=False, difficulty=3, individual=True, start=date(year=2024, month=3, day=1), end=date(year=2024, month=3, day=15))
+           image='3.jfif', kind=2, daily=False, difficulty=3, individual=True, start=date(year=2024, month=3, day=1), end=date(year=2024, month=3, day=15))
 t4 = Tasks(task='Провести уборку столовой после завтрака',
            image='---', kind=7, daily=True, difficulty=2, individual=True, start=date(year=2024, month=3, day=8), end=date(year=2024, month=3, day=9))
 t5 = Tasks(task='Подготовить и провести урок в рамках школьного кружка или клуба',

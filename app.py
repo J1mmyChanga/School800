@@ -28,6 +28,8 @@ api = Api(app)
 # api.add_resource(LoginResource, "/api/login")
 api.add_resource(TasksListResource, "/api/tasks_completed")
 api.add_resource(TaskResource, "/api/tasks_completed/<int:task_id>")
+api.add_resource(TaskPhotoResource, "/api/tasks/images/<int:task_id>")
+api.add_resource(AddingTaskPhotoResource, "/api/tasks/images")
 
 api.add_resource(GroupResource, "/api/groups")
 
