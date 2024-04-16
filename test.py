@@ -30,7 +30,8 @@ for i in range(1, 9):
 u1 = Users(email='artemkrot@gmail.com', first_name='Артем', second_name='Жуков', surname='Геннадьевич', rating=337, grade='11.4', group=1, hashed_password='1234')
 u2 = Users(email='kostyakrot@gmail.com', first_name='Костя', second_name='Дробязкин', surname='Алексеевич', rating=228, grade='11.2', group=4, hashed_password='124')
 u3 = Users(email='yashakrot@gmail.com', first_name='Яков', second_name='Мартыненков', surname='Юрьевич', rating=404, grade='11.1', group=2, hashed_password='125554')
-for i in range(1, 4):
+u4 = Users(email='aboba@gmail.com', first_name='Ковлад', second_name='Рукомойник', surname='Негры', rating=34, grade='11.5', group=3, hashed_password='125554')
+for i in range(1, 5):
     session.add(eval(f'u{i}'))
 
 t1 = Tasks(task='Полить цветы на школьной территории',

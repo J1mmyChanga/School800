@@ -14,7 +14,8 @@ class UsersListResource(Resource):
     def get():
         res = []
         session = db_session.create_session()
-        users = session.query(Users)
+        users = session.query(Users).all()
+        print(users)
         for user in users:
             d = {
                 'id': user.id,
@@ -30,9 +31,12 @@ class UsersListResource(Resource):
         return jsonify(res)
 
     @staticmethod
-    def put():
+    def patch():
         id = request.json["id"]
         rating = request.json["rating"]
+        group = request.json["group"]
+        print(group)
+        print(rating)
 
         session = db_session.create_session()
         user = session.get(Users, id)
@@ -70,6 +74,11 @@ class UserPhotoResource(Resource):
         user = session.get(Users, user_id)
         if not user:
             return {'wrong answer': "user wasn't found"}
+
+        directory = "assets/users"
+        files = os.listdir(directory)
+        if f'{user_id}.png' not in files:
+            return send_from_directory('assets/users', '0.png')
         return send_from_directory('assets/users', f'{user_id}.png')
 
 

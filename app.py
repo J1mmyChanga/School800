@@ -4,8 +4,6 @@ from flask import Flask
 from flask_restful import Api
 from flask_cors import CORS
 
-from werkzeug.serving import WSGIRequestHandler
-
 from data import db_session
 from resources import *
 
@@ -40,7 +38,6 @@ api.add_resource(AddingUserPhotoResource, "/api/users/images")
 
 
 def main():
-    WSGIRequestHandler.protocol_version = "HTTP/1.1"
     app.run(port=8080, host='0.0.0.0')
 
 
