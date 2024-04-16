@@ -28,7 +28,6 @@ class RegisterResource(Resource):
             rating=rating,
             grade=grade,
         )
-        print('EFGSGsDRDZGARGDHATFTTRFFSSAGAADR')
         user.set_password(password)
         session.add(user)
         session.commit()

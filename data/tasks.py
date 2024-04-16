@@ -5,7 +5,7 @@ from .db_session import SqlAlchemyBase
 
 
 class Tasks(SqlAlchemyBase):
-    __tablename__ = 'tasks_completed'
+    __tablename__ = 'tasks'
 
     id = sqlalchemy.Column(sqlalchemy.Integer, primary_key=True, autoincrement=True)
     task = sqlalchemy.Column(sqlalchemy.String)  # текст задания
@@ -40,9 +40,21 @@ class Tasks(SqlAlchemyBase):
         backref="tasks_in_process"
     )
 
+    users_undo = orm.relationship(
+        "Users",
+        secondary="tasks_to_users_undone",
+        backref="tasks_undone"
+    )
+
+    groups_undo = orm.relationship(
+        "Groups",
+        secondary="tasks_to_groups_undone",
+        backref="tasks_undone"
+    )
+
 
 
     kinds = orm.relationship(
         "Kinds",
-        backref="tasks_completed"
+        backref="tasks"
     )
