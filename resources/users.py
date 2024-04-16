@@ -67,8 +67,11 @@ class UserResource(Resource):
 
 class UserPhotoResource(Resource):
     @staticmethod
-    def get(name):
-        return send_from_directory('assets/users', name)
+    def get(user_uid):
+        session = db_session.create_session()
+        user = session.get(Users, user_uid)
+        return send_from_directory('assets/users', user.image)
+
 
 class AddingUserPhotoResource(Resource):
     @staticmethod

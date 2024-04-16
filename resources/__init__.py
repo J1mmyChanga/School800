@@ -3,4 +3,4 @@ from .register import RegisterResource
 from .tasks import TaskResource, TasksListResource
 from .groups import GroupResource
 from .kinds import KindsListResource
-from .users import UserResource, UsersListResource
+from .users import UserResource, UserPhotoResource, UsersListResource, AddingUserPhotoResource

@@ -24,6 +24,8 @@ class TasksListResource(Resource):
                 'individual': task.individual,
                 'kind': task.kind,
                 'daily': task.daily,
+                'image': task.image,
+                'image_completed': task.image_completed,
             }
             res.append(d)
         return jsonify(res)
@@ -42,6 +44,8 @@ class TasksListResource(Resource):
             individual=request.json["individual"],
             kind=request.json["kind"],
             daily=request.json["daily"],
+            image=request.json["image"],
+            image_completed=request.json["image_completed"],
         )
         session.add(task)
         session.commit()
@@ -77,5 +81,7 @@ class TaskResource(Resource):
             'individual': task.individual,
             'kind': task.kind,
             'daily': task.daily,
+            'image': task.image,
+            'image_completed': task.image_completed,
         }]
         return jsonify(res)

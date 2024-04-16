@@ -5,7 +5,7 @@ from .db_session import SqlAlchemyBase
 
 
 class Tasks(SqlAlchemyBase):
-    __tablename__ = 'tasks'
+    __tablename__ = 'tasks_completed'
 
     id = sqlalchemy.Column(sqlalchemy.Integer, primary_key=True, autoincrement=True)
     task = sqlalchemy.Column(sqlalchemy.String)  # текст задания
@@ -14,6 +14,7 @@ class Tasks(SqlAlchemyBase):
     difficulty = sqlalchemy.Column(sqlalchemy.Integer)  # 1 - легкое, 2 - среднее, 3 - сложное
     individual = sqlalchemy.Column(sqlalchemy.Boolean)  # групповое - false или индивидуальное - true
     kind = sqlalchemy.Column(sqlalchemy.Integer, sqlalchemy.ForeignKey('kinds.id')) #направление задания
+    image_completed = sqlalchemy.Column(sqlalchemy.String)
     image = sqlalchemy.Column(sqlalchemy.String)
     daily = sqlalchemy.Column(sqlalchemy.Boolean) # ежедневное - true или нет - false
 
@@ -45,5 +46,5 @@ class Tasks(SqlAlchemyBase):
 
     kinds = orm.relationship(
         "Kinds",
-        backref="tasks"
+        backref="tasks_completed"
     )
