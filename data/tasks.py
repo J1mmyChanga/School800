@@ -15,6 +15,7 @@ class Tasks(SqlAlchemyBase):
     individual = sqlalchemy.Column(sqlalchemy.Boolean)  # групповое - false или индивидуальное - true
     kind = sqlalchemy.Column(sqlalchemy.Integer, sqlalchemy.ForeignKey('kinds.id')) #направление задания
     status = sqlalchemy.Column(sqlalchemy.Boolean) # тру - не на рассмотрении, фолс - на рассмотрении
+    completed = sqlalchemy.Column(sqlalchemy.Boolean) # тру - принято, фолс - не принято
     daily = sqlalchemy.Column(sqlalchemy.Boolean) # ежедневное - true или нет - false
 
     users_completed = orm.relationship(

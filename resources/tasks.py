@@ -31,6 +31,7 @@ class TasksListResource(Resource):
                 'kind': task.kind,
                 'daily': task.daily,
                 'status': task.status,
+                'completed': task.completed,
             }
             res.append(d)
         return jsonify(res)
@@ -49,6 +50,7 @@ class TasksListResource(Resource):
             kind=request.json["kind"],
             daily=request.json["daily"],
             status=request.json["status"],
+            completed=request.json["completed"],
         )
         session.add(task)
         group = session.get(Groups, request.json['group'])
@@ -87,5 +89,6 @@ class TaskResource(Resource):
             'kind': task.kind,
             'daily': task.daily,
             'status': task.status,
+            'completed': task.completed,
         }]
         return jsonify(res)

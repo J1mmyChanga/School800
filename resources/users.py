@@ -54,7 +54,7 @@ class UserResource(Resource):
         user = session.get(Users, user_id)
         if not user:
             return {'wrong answer': "user wasn't found"}
-        res = [{
+        res = {
             'id': user.id,
             'email': user.email,
             'first_name': user.first_name,
@@ -63,7 +63,7 @@ class UserResource(Resource):
             'rating': user.rating,
             'grade': user.grade,
             'group': user.group,
-        }]
+        }
         return jsonify(res)
 
 
