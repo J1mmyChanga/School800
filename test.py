@@ -73,7 +73,7 @@ t18 = Tasks(task='Помочь библиотекарю организовать
 t19 = Tasks(task='Участвовать в работе школьного интернет-журнала: писать статьи, делиться новостями',
            image='19.png', kind=2, daily=False, difficulty=3, individual=False, start=date(year=2024, month=2, day=1), end=date(year=2024, month=4, day=2))
 t20 = Tasks(task='Провести анкетирование среди учеников по теме предпочтений в образовательном процессе и анализировать полученные данные',
-           image='20.jpg', kind=2, daily=False, difficulty=3, individual=False, start=date(year=2024, month=1, day=8), end=date(year=2024, month=1, day=16))
+           image='20.png', kind=2, daily=False, difficulty=3, individual=False, start=date(year=2024, month=1, day=8), end=date(year=2024, month=1, day=16))
 
 for i in range(1, 21):
     session.add(eval(f't{i}'))
