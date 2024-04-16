@@ -18,14 +18,13 @@ ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'jfif'}
 app = Flask(__name__)
 CORS(app, supports_credentials=True)
 app.config["SECRET_KEY"] = "Bebrochka666"
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['JSON_AS_ASCII'] = False
 
 db_session.global_init('db/school800.db')
 
 api = Api(app)
-# api.add_resource(RegisterResource, "/api/register")
-# api.add_resource(LoginResource, "/api/login")
+api.add_resource(RegisterResource, "/api/register")
+
 api.add_resource(TasksListResource, "/api/tasks")
 api.add_resource(TaskResource, "/api/tasks/<int:task_id>")
 api.add_resource(TaskPhotoResource, "/api/tasks/images/<int:task_id>")
