@@ -25,7 +25,7 @@ class UsersListResource(Resource):
                 'rating': user.rating,
                 'grade': user.grade,
                 'group': user.group,
-                'hashed_password': user.hashed_password,
+                'image':user.image
             }
             res.append(d)
         return jsonify(res)
@@ -60,7 +60,7 @@ class UserResource(Resource):
             'rating': user.rating,
             'grade': user.grade,
             'group': user.group,
-            'hashed_password': user.hashed_password,
+            'image': user.image,
         }]
         return jsonify(res)
 

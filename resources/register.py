@@ -15,9 +15,7 @@ class RegisterResource(Resource):
         surname = request.json["surname"]
         rating = 0
         grade = request.json["grade"]
-        group = request.json["group"]
-        image = ''
-        password = request.json["password"]
+        # password = request.json["password"]
 
 
         session = db_session.create_session()
@@ -29,10 +27,8 @@ class RegisterResource(Resource):
             surname=surname,
             rating=rating,
             grade=grade,
-            group=group,
-            image=image,
         )
-        user.set_password(password)
+        # user.set_password(password)
         session.add(user)
         session.commit()
 
