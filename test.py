@@ -27,9 +27,9 @@ k8 = Kinds(title='Успехи в учёбе')
 for i in range(1, 9):
     session.add(eval(f'k{i}'))
 
-u1 = Users(image='---', uid='346fEsgGSE', email='artemkrot@gmail.com', first_name='Артем', second_name='Жуков', surname='Геннадьевич', rating=337, grade='11.4', group=1, hashed_password='1234')
-u2 = Users(image='---', uid='754sgdjffhdghdg4w', email='kostyakrot@gmail.com', first_name='Костя', second_name='Дробязкин', surname='Алексеевич', rating=228, grade='11.2', group=4, hashed_password='124')
-u3 = Users(image='---', uid='2ipiutystsr', email='yashakrot@gmail.com', first_name='Яков', second_name='Мартыненков', surname='Юрьевич', rating=404, grade='11.1', group=2, hashed_password='125554')
+u1 = Users(image='346fEsgGSE.jfif', uid='346fEsgGSE', email='artemkrot@gmail.com', first_name='Артем', second_name='Жуков', surname='Геннадьевич', rating=337, grade='11.4', group=1, hashed_password='1234')
+u2 = Users(image='754sgdjffhdghdg4w.jfif', uid='754sgdjffhdghdg4w', email='kostyakrot@gmail.com', first_name='Костя', second_name='Дробязкин', surname='Алексеевич', rating=228, grade='11.2', group=4, hashed_password='124')
+u3 = Users(image='2ipiutystsr.jfif', uid='2ipiutystsr', email='yashakrot@gmail.com', first_name='Яков', second_name='Мартыненков', surname='Юрьевич', rating=404, grade='11.1', group=2, hashed_password='125554')
 for i in range(1, 4):
     session.add(eval(f'u{i}'))
 
