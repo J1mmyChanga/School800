@@ -17,6 +17,9 @@ class RegisterResource(Resource):
         password = request.json["password"]
 
         session = db_session.create_session()
+        user = session.query(Users).filter(Users.email == email).first()
+        if user:
+            return jsonify({"err": "User already exists"})
         user = Users(
             email=email,
             first_name=first_name,
@@ -25,9 +28,6 @@ class RegisterResource(Resource):
             rating=rating,
             grade=grade,
         )
-        print('EFGSGsDRDZGARGDHATFTTRFFSSAGAADR')
-        if user:
-            return jsonify({"err": "User already exists"})
         print('EFGSGsDRDZGARGDHATFTTRFFSSAGAADR')
         user.set_password(password)
         session.add(user)
