@@ -7,6 +7,7 @@ from datetime import date
 from werkzeug.utils import secure_filename
 
 from data import db_session
+from data.groups import Groups
 from data.tasks import Tasks
 from misc import allowed_file
 
@@ -29,6 +30,7 @@ class TasksListResource(Resource):
                 'individual': task.individual,
                 'kind': task.kind,
                 'daily': task.daily,
+                'status': task.status,
             }
             res.append(d)
         return jsonify(res)
@@ -46,8 +48,11 @@ class TasksListResource(Resource):
             individual=request.json["individual"],
             kind=request.json["kind"],
             daily=request.json["daily"],
+            status=request.json["status"],
         )
         session.add(task)
+        group = session.get(Groups, request.json['group'])
+        task.groups_undo.append(group)
         session.commit()
         return {'success': 'OK'}
 
@@ -81,31 +86,6 @@ class TaskResource(Resource):
             'individual': task.individual,
             'kind': task.kind,
             'daily': task.daily,
+            'status': task.status,
         }]
         return jsonify(res)
-
-
-class TaskPhotoResource(Resource):
-    @staticmethod
-    def get(task_id):
-        session = db_session.create_session()
-        task = session.get(Tasks, task_id)
-        if not task:
-            return {'wrong answer': "task wasn't found"}
-        return send_from_directory('assets/tasks', f'{task.id}.png')
-
-
-class AddingTaskPhotoResource(Resource):
-    @staticmethod
-    def post():
-        if 'file' not in request.files:
-            flash('No file part')
-            return redirect(request.url)
-        file = request.files['file']
-        if file.filename == '':
-            flash('No selected file')
-            return redirect(request.url)
-
-        if file and allowed_file(file.filename):
-            filename = secure_filename(file.filename)
-            file.save(os.path.join('assets/tasks', filename))

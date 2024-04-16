@@ -25,6 +25,8 @@ api.add_resource(TasksListResource, "/api/tasks")
 api.add_resource(TaskResource, "/api/tasks/<int:task_id>")
 api.add_resource(TaskPhotoResource, "/api/tasks/images/<int:task_id>")
 api.add_resource(AddingTaskPhotoResource, "/api/tasks/images")
+api.add_resource(CompletedTaskPhotoResource, "/api/tasks/completed/images/<int:task_id>")
+api.add_resource(AddingCompletedTaskPhotoResource, "/api/tasks/completed/images")
 
 api.add_resource(CompletedTasksResource, "/api/tasks/completed/<int:user_id>")
 api.add_resource(InProcessTasksResource, "/api/tasks/processing/<int:user_id>")
@@ -37,7 +39,6 @@ api.add_resource(KindsListResource, "/api/kinds")
 
 api.add_resource(UsersListResource, "/api/users")
 api.add_resource(UserResource, "/api/users/<int:user_id>")
-
 api.add_resource(UserPhotoResource, "/api/users/images/<int:user_id>")
 api.add_resource(AddingUserPhotoResource, "/api/users/images")
 

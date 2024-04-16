@@ -79,4 +79,8 @@ t20 = Tasks(task='Провести анкетирование среди уче�
 for i in range(1, 21):
     session.add(eval(f't{i}'))
 
+
+u3.tasks_completed.append(t2)
+u3.tasks_completed.append(t1)
+u3.tasks_completed.append(t6)
 session.commit()
