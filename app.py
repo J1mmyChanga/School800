@@ -23,6 +23,8 @@ api.add_resource(LoginResource, "/api/login")
 
 api.add_resource(TasksListResource, "/api/tasks")
 api.add_resource(TaskResource, "/api/tasks/<int:task_id>")
+api.add_resource(TasksPunishmentResource, "/api/tasks/punish")
+
 api.add_resource(TaskPhotoResource, "/api/tasks/images/<int:task_id>")
 api.add_resource(AddingTaskPhotoResource, "/api/tasks/images")
 api.add_resource(CompletedTaskPhotoResource, "/api/tasks/completed/images/<int:task_id>")

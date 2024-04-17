@@ -9,6 +9,7 @@ from werkzeug.utils import secure_filename
 from data import db_session
 from data.groups import Groups
 from data.tasks import Tasks
+from data.users import Users
 from misc import allowed_file
 
 
@@ -54,18 +55,29 @@ class TasksListResource(Resource):
         )
         session.add(task)
         group = session.get(Groups, request.json['group'])
-        task.groups_undo.append(group)
+        task.groups_undone.append(group)
         session.commit()
         return {'success': 'OK'}
 
     @staticmethod
-    def put():
+    def patch():
         task_id = request.json["id"]
+        difficulty = request.json["difficulty"]
         session = db_session.create_session()
         task = session.get(Tasks, task_id)
         if not task:
             return {'wrong answer': "task wasn't found"}
-        # вся логика
+        user = task.users_in_process[0]
+        user.tasks_in_process.remove(task)
+        user.tasks_completed.append(task)
+        if difficulty == 1:
+            k = 5
+        elif difficulty == 2:
+            k = 12
+        else:
+            k = 25
+        user.rating += k
+        task.completed = True
         session.commit()
         return {'success': 'OK'}
 
@@ -92,3 +104,15 @@ class TaskResource(Resource):
             'completed': task.completed,
         }]
         return jsonify(res)
+
+
+class TasksPunishmentResource(Resource):
+    @staticmethod
+    def patch():
+        user_id = request.json["id"]
+        points = request.json["points"]
+        session = db_session.create_session()
+        user = session.get(Users, user_id)
+        user.rating -= points
+        session.commit()
+        return {'success': 'OK'}

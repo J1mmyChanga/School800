@@ -42,13 +42,13 @@ class Tasks(SqlAlchemyBase):
         backref="tasks_in_process"
     )
 
-    users_undo = orm.relationship(
+    users_undone = orm.relationship(
         "Users",
         secondary="tasks_to_users_undone",
         backref="tasks_undone"
     )
 
-    groups_undo = orm.relationship(
+    groups_undone = orm.relationship(
         "Groups",
         secondary="tasks_to_groups_undone",
         backref="tasks_undone"

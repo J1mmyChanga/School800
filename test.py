@@ -30,20 +30,20 @@ for i in range(1, 9):
 u1 = Users(email='artemkrot@gmail.com', first_name='Артем', second_name='Жуков', surname='Геннадьевич', rating=337, grade='11.4', group=1, hashed_password='1234')
 u2 = Users(email='kostyakrot@gmail.com', first_name='Костя', second_name='Дробязкин', surname='Алексеевич', rating=228, grade='11.2', group=4, hashed_password='124')
 u3 = Users(email='yashakrot@gmail.com', first_name='Яков', second_name='Мартыненков', surname='Юрьевич', rating=404, grade='11.1', group=2, hashed_password='125554')
-u4 = Users(email='aboba@gmail.com', first_name='Ковлад', second_name='Рукомойник', surname='Негры', rating=34, grade='11.5', group=3, hashed_password='125554')
+u4 = Users(email='aboba@gmail.com', first_name='Владислав', second_name='Ковалев', surname='Батькович', rating=34, grade='11.5', group=3, hashed_password='125554')
 for i in range(1, 5):
     session.add(eval(f'u{i}'))
 
 t1 = Tasks(task='Полить цветы на школьной территории',
-           completed=True, status=True, kind=7, daily=True, difficulty=1, individual=True, start=date(year=2024, month=3, day=1), end=date(year=2024, month=3, day=2))
+           completed=False, status=True, kind=7, daily=True, difficulty=1, individual=True, start=date(year=2024, month=3, day=1), end=date(year=2024, month=3, day=2))
 t2 = Tasks(task='Подмести и вымыть пол на школьной площадке',
-           completed=True, status=True, kind=7, daily=False, difficulty=2, individual=False, start=date(year=2024, month=3, day=7), end=date(year=2024, month=3, day=14))
+           completed=False, status=True, kind=7, daily=False, difficulty=2, individual=False, start=date(year=2024, month=3, day=7), end=date(year=2024, month=3, day=14))
 t3 = Tasks(task='Исследовать и написать отчёт о лучших растений для обустройства школы',
-           completed=True, status=True, kind=2, daily=False, difficulty=3, individual=True, start=date(year=2024, month=3, day=1), end=date(year=2024, month=3, day=15))
+           completed=False, status=True, kind=2, daily=False, difficulty=3, individual=True, start=date(year=2024, month=3, day=1), end=date(year=2024, month=3, day=15))
 t4 = Tasks(task='Провести уборку столовой после завтрака',
-           completed=True, status=True, kind=7, daily=True, difficulty=2, individual=True, start=date(year=2024, month=3, day=8), end=date(year=2024, month=3, day=9))
+           completed=False, status=True, kind=7, daily=True, difficulty=2, individual=True, start=date(year=2024, month=3, day=8), end=date(year=2024, month=3, day=9))
 t5 = Tasks(task='Подготовить и провести урок в рамках школьного кружка или клуба',
-           completed=True, status=True, kind=2, daily=False, difficulty=3, individual=True, start=date(year=2024, month=5, day=9), end=date(year=2024, month=5, day=23))
+           completed=False, status=True, kind=2, daily=False, difficulty=3, individual=True, start=date(year=2024, month=5, day=9), end=date(year=2024, month=5, day=23))
 t6 = Tasks(task='Организовать и провести спортивный турнир по воллейболу среди учеников',
            completed=False, status=True, kind=1, daily=False, difficulty=2, individual=False, start=date(year=2024, month=4, day=1), end=date(year=2024, month=4, day=30))
 t7 = Tasks(task='Посадить дерево на территории школы',
@@ -79,8 +79,21 @@ t20 = Tasks(task='Провести анкетирование по теме пр
 for i in range(1, 21):
     session.add(eval(f't{i}'))
 
+t4.status=True
+t5.status=True
+t6.status=True
+u3.tasks_in_process.append(t4)
+u3.tasks_in_process.append(t5)
+u3.tasks_in_process.append(t6)
 
-u3.tasks_completed.append(t2)
-u3.tasks_completed.append(t1)
-u3.tasks_completed.append(t6)
+u3.tasks_undo.append(t1)
+u3.tasks_undo.append(t2)
+u3.tasks_undo.append(t3)
+
+t7.completed=True
+t8.completed=True
+t9.completed=True
+u3.tasks_completed.append(t7)
+u3.tasks_completed.append(t8)
+u3.tasks_completed.append(t9)
 session.commit()

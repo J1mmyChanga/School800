@@ -38,3 +38,15 @@ class AddingCompletedTaskPhotoResource(Resource):
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
             file.save(os.path.join('assets/tasks_completed', filename))
+
+        task_id = int(file.filename.split('.')[0])
+        session = db_session.create_session()
+        task = session.get(Tasks, task_id)
+        if not task:
+            return {'wrong answer': "task wasn't found"}
+        user = task.users_undone[0]
+        user.tasks_undone.remove(task)
+        user.tasks_in_process.append(task)
+        task.status = True
+        session.commit()
+        return {'success': 'OK'}
