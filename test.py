@@ -9,10 +9,10 @@ from data.association_tables import *
 db_session.global_init('db/school800.db')
 session = db_session.create_session()
 
-g1 = Groups(title='Нео', rating=4464)
-g2 = Groups(title='Класт', rating=6879)
-g3 = Groups(title='Трейл', rating=2234)
-g4 = Groups(title='Скрипт', rating=2868)
+g1 = Groups(title='Нео', rating=44)
+g2 = Groups(title='Класт', rating=68)
+g3 = Groups(title='Трейл', rating=23)
+g4 = Groups(title='Скрипт', rating=68)
 for i in range(1, 5):
     session.add(eval(f'g{i}'))
 
@@ -86,9 +86,9 @@ u3.tasks_in_process.append(t4)
 u3.tasks_in_process.append(t5)
 u3.tasks_in_process.append(t6)
 
-u3.tasks_undo.append(t1)
-u3.tasks_undo.append(t2)
-u3.tasks_undo.append(t3)
+u3.tasks_undone.append(t1)
+u3.tasks_undone.append(t2)
+u3.tasks_undone.append(t3)
 
 t7.completed=True
 t8.completed=True

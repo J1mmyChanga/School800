@@ -54,8 +54,9 @@ class TasksListResource(Resource):
             completed=request.json["completed"],
         )
         session.add(task)
-        group = session.get(Groups, request.json['group'])
-        task.groups_undone.append(group)
+        if not request.json["individual"]:
+            group = session.get(Groups, request.json['group'])
+            task.groups_undone.append(group)
         session.commit()
         return {'success': 'OK'}
 
@@ -104,6 +105,12 @@ class TaskResource(Resource):
             'completed': task.completed,
         }]
         return jsonify(res)
+
+    @staticmethod
+    def delete(task_id):
+        session = db_session.create_session()
+        session.delete(session.get(Tasks, task_id))
+        session.commit()
 
 
 class TasksPunishmentResource(Resource):
