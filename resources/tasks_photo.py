@@ -17,7 +17,7 @@ class TaskPhotoResource(Resource):
         task = session.get(Tasks, task_id)
         if not task:
             return {'wrong answer': "task wasn't found"}
-        directory = "assets/tasks_completed"
+        directory = "assets/tasks"
         files = os.listdir(directory)
         if f'{task_id}.png' not in files:
             return send_from_directory('assets/tasks', '0.png')

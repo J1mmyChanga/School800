@@ -68,7 +68,10 @@ class TasksListResource(Resource):
         task = session.get(Tasks, task_id)
         if not task:
             return {'wrong answer': "task wasn't found"}
-        user = task.users_in_process[0]
+        try:
+            user = task.users_in_process[0]
+        except Exception:
+            return jsonify({'err': 'no users to this task'})
         user.tasks_in_process.remove(task)
         user.tasks_completed.append(task)
         if difficulty == 1:

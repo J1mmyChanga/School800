@@ -75,8 +75,10 @@ t19 = Tasks(task='Участвовать в работе школьного ин
            completed=False, status=False, kind=2, daily=False, difficulty=3, individual=False, start=date(year=2024, month=2, day=1), end=date(year=2024, month=4, day=2))
 t20 = Tasks(task='Провести анкетирование по теме предпочтений в образовательном процессе',
            completed=False, status=False, kind=2, daily=False, difficulty=3, individual=False, start=date(year=2024, month=1, day=8), end=date(year=2024, month=1, day=16))
+t21 = Tasks(task='Победить/стать призером во ВСОШ',
+           completed=False, status=False, kind=3, daily=False, difficulty=3, individual=False, start=date(year=2024, month=1, day=8), end=date(year=2024, month=1, day=16))
 
-for i in range(1, 21):
+for i in range(1, 22):
     session.add(eval(f't{i}'))
 
 t4.status=True
